@@ -1,14 +1,28 @@
 <?php
-$umur = 7;
-$berhitung = true;
 
-if ($umur > 6) {
-    if ($berhitung) {
-        echo "Selamat anda diperbolehkan masuk kelas 1 SD!";
-    } else {
-        echo "Anda diperbolehkan masuk ke kelas 1 SD dengan catatan harus lancar berhitung!";
-    }
+$nilai = 88;
+
+if ($nilai > 90) {
+    $grade = "A+";
+} elseif ($nilai > 80){
+    $grade = "A";
+} elseif($nilai > 70){
+    $grade = "B+";
+} elseif($nilai > 60){
+    $grade = "B";
+} elseif($nilai > 50){
+    $grade = "C+";
+} elseif($nilai > 40){
+    $grade = "C";
+} elseif($nilai > 30){
+    $grade = "D";
+} elseif($nilai > 20){
+    $grade = "E";
 } else {
-    echo "Maaf belum cukup umur untuk masuk kelas 1 SD";
+    $grade = "F";
 }
+
+echo "Nilai anda: $nilai<br>";
+echo "Grade: $grade";
+
 ?>
