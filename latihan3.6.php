@@ -1,22 +1,14 @@
 <?php
+$umur = 7;
+$berhitung = true;
 
-$level = 3;
-
-switch($level){
-    case 1:
-        echo "Pelajari HTML";
-        break;
-    case 2:
-        echo "Pelajari CSS";
-        break;
-    case 3:
-        echo "Pelajari Javascript";
-        break;
-    case 4:
-        echo "Pelajari PHP";
-        break;
-    default:
-        echo "Kamu bukan programmer!";
+if ($umur > 6) {
+    if ($berhitung) {
+        echo "Selamat anda diperbolehkan masuk kelas 1 SD!";
+    } else {
+        echo "Anda diperbolehkan masuk ke kelas 1 SD dengan catatan harus lancar berhitung!";
+    }
+} else {
+    echo "Maaf belum cukup umur untuk masuk kelas 1 SD";
 }
-
 ?>
