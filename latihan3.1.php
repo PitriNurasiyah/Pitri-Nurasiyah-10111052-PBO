@@ -6,28 +6,6 @@ class BarangHarian{
     var $jumlah;
     var $total;
 
-    function setNamaBarang($namabarang){
-        $this->namabarang = $namabarang;
-    }
-     function getNamaBarang() {
-        return $this->namabarang;
-    }
-
-    function setharga($harga) {
-        $this->harga = $harga;
-    }
-    function getHarga() {
-        return $this->harga;
-    }
-
-    function setJumlah($jumlah) {
-        $this->jumlah = $jumlah;
-    }
-    function getJumlah() {
-        return $this->jumlah;
-    }
-
-    
     function hitungTotalPembayaran() {
         $total = $this->harga * $this->jumlah;
         return $total;
@@ -43,38 +21,35 @@ class BarangHarian{
 }
 
 $barang1 = new BarangHarian();
-$barang1 -> setharga(15000);
-$barang1 -> setJumlah (3);
+$barang1 -> harga = 15000;
+$barang1 -> jumlah = 3;
 
 $barang2 = new BarangHarian();
-$barang2 -> setNamaBarang ("Kopi");
-$barang2 -> setharga(3000);
-$barang2 -> setJumlah (5);
+$barang2 -> namabarang = "Kopi";
+$barang2 -> harga = 3000;
+$barang2 -> jumlah = 5;
 
 $barang3 = new BarangHarian();
-$barang3 -> setNamaBarang ("Air Mineral");
-$barang3 -> setharga (5000);
-$barang3 -> setJumlah(5);
+$barang3 -> namabarang = "Air Mineral";
+$barang3 -> harga = 5000;
+$barang3 -> jumlah = 5;
 
-
-
-echo "Nama Barang : " . $barang1 -> getNamaBarang(); echo "<br>";
-echo "Harga : Rp. " . $barang1 -> getHarga(); echo "<br>";
-echo "Jumlah : " . $barang1 -> getJumlah(); echo "<br>";
+echo "Nama Barang : " . $barang1 -> namabarang; echo "<br>";
+echo "Harga : Rp. " . $barang1 -> harga; echo "<br>";
+echo "Jumlah : " . $barang1 -> jumlah; echo "<br>";
 echo "Total : Rp. " . $barang1 -> hitungTotalPembayaran(); echo "<br>";
 echo "Status : " . $barang1 -> statusPembayaran(); echo "<br>"; echo "<br>";
 
-echo "Nama Barang : " . $barang2 -> getNamaBarang(); echo "<br>";
-echo "Harga : Rp. " . $barang2 -> getHarga(); echo "<br>";
-echo "Jumlah : " . $barang2 -> getJumlah(); echo "<br>";
+echo "Nama Barang : " . $barang2 -> namabarang; echo "<br>";
+echo "Harga : Rp. " . $barang2 -> harga; echo "<br>";
+echo "Jumlah : " . $barang2 -> jumlah; echo "<br>";
 echo "Total : Rp. " . $barang2 -> hitungTotalPembayaran(); echo "<br>";
 echo "Status : " . $barang2 -> statusPembayaran(); echo "<br>"; echo "<br>";
 
-echo "Nama Barang : " . $barang3 -> getNamaBarang(); echo "<br>";
-echo "Harga : Rp. " . $barang3 -> getHarga(); echo "<br>";
-echo "Jumlah : " . $barang3 -> getJumlah(); echo "<br>";
+echo "Nama Barang : " . $barang3 -> namabarang; echo "<br>";
+echo "Harga : Rp. " . $barang3 -> harga; echo "<br>";
+echo "Jumlah : " . $barang3 -> jumlah; echo "<br>";
 echo "Total : Rp. " . $barang3 -> hitungTotalPembayaran(); echo "<br>";
 echo "Status : " . $barang3 -> statusPembayaran(); echo "<br>"; echo "<br>";
-
 
 ?>
