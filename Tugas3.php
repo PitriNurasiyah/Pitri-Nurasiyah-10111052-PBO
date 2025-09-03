@@ -33,9 +33,23 @@ class Pembeli {
         return $this->diskon;
     }
 
+
     public function hitungDiskon() {
-        $diskon = 0;
-        $totalBelanja = $this -> getTotalBelanja();
+        if ($this->kartuMember) {
+            if ($this->totalBelanja > 500000) {
+                $this->diskon = 50000;
+            } elseif ($this->totalBelanja > 100000) {
+                $this->diskon = 15000;
+            } else {
+                $this->diskon = 0;
+            }
+        } else {
+            if ($this->totalBelanja > 100000) {
+                $this->diskon = 5000;
+            } else {
+                $this->diskon = 0;
+            }
+        }
     }
 }
 
