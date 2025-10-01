@@ -61,51 +61,52 @@ class Tabungan extends UangTabungan {
     }
 }
 
-// Fungsi untuk baca input dari CLI dengan validasi angka positif
-function bacaInput($prompt) {
-    echo $prompt;
+// Fungsi untuk baca input dari CLI
+function bacaInput($pesan) {
+    echo $pesan;
     return trim(fgets(STDIN));
 }
 
 // Fungsi untuk membaca pilihan menu valid (1-4)
 function bacaPilihanMenu() {
-    do {
-        $input = bacaInput("Pilih menu (1-4): ");
-        if (in_array($input, ['1','2','3','4'])) {
+    while (true) {
+        $input = bacaInput(">> Pilih menu (1-4): ");
+        if (in_array($input, ['1', '2', '3', '4'])) {
             return $input;
         } else {
             echo "Pilihan tidak valid. Silakan coba lagi.\n";
         }
-    } while (true);
+    }
 }
 
-// Fungsi untuk baca ID employee valid (1-3)
-function bacaIdEmployee($max, $tabungan) {
-    do {
+// Fungsi untuk baca ID siswa valid
+function bacaIdSiswa($max, $tabungan) {
+    while (true) {
         echo "Daftar Siswa:\n";
         foreach ($tabungan as $index => $obj) {
             echo ($index + 1) . ". " . $obj->getNama() . " (Saldo: Rp" . number_format($obj->getSaldo(), 0, ',', '.') . ")\n";
         }
-        $input = bacaInput("Pilih siswa (1-$max): ");
+
+        $input = bacaInput(">> Pilih siswa (1-$max): ");
         if (ctype_digit($input)) {
-            $num = intval($input);
+            $num = $input;
             if ($num >= 1 && $num <= $max) {
-                return $num - 1; // array index mulai 0
+                return $num - 1; // array index mulai dari 0
             }
         }
-        echo "Input tidak valid. Silakan masukkan angka antara 1 sampai $max.\n";
-    } while (true);
+        echo "Input tidak valid. Masukkan angka antara 1 sampai $max.\n";
+    }
 }
 
 // Fungsi untuk baca jumlah uang (positif)
-function bacaJumlah($prompt) {
-    do {
-        $input = bacaInput($prompt);
-        if (ctype_digit($input) && intval($input) > 0) {
-            return intval($input);
+function bacaJumlah($pesan) {
+    while (true) {
+        $input = bacaInput($pesan);
+        if (ctype_digit($input) && $input > 0) {
+            return $input;
         }
         echo "Jumlah harus berupa angka positif.\n";
-    } while (true);
+    }
 }
 
 // Program utama
@@ -117,7 +118,7 @@ $tabungan = [
 
 echo "=== Program Tabungan Sekolah ===\n";
 
-do {
+while (true) {
     echo "\nMenu:\n";
     echo "1. Tampilkan Saldo\n";
     echo "2. Setor Tunai\n";
@@ -127,12 +128,11 @@ do {
     $pilihan = bacaPilihanMenu();
 
     if ($pilihan == '4') {
-        break; // keluar loop
+        break;
     }
 
     switch ($pilihan) {
         case '1':
-            // Tampilkan saldo semua siswa sekaligus
             echo "Daftar saldo siswa:\n";
             foreach ($tabungan as $obj) {
                 $obj->tampilkanSaldo();
@@ -140,34 +140,23 @@ do {
             break;
 
         case '2':
-            // Pilih siswa dulu baru setor
-            $id = bacaIdEmployee(count($tabungan), $tabungan);
-            $jumlahSetor = bacaJumlah("Masukkan jumlah setor: Rp");
+            $id = bacaIdSiswa(count($tabungan), $tabungan);
+            $jumlahSetor = bacaJumlah(">> Masukkan jumlah setor: Rp");
             $tabungan[$id]->setorTunai($jumlahSetor);
             break;
 
         case '3':
-            // Pilih siswa dulu baru tarik
-            $id = bacaIdEmployee(count($tabungan), $tabungan);
-            $jumlahTarik = bacaJumlah("Masukkan jumlah tarik: Rp");
+            $id = bacaIdSiswa(count($tabungan), $tabungan);
+            $jumlahTarik = bacaJumlah(">> Masukkan jumlah tarik: Rp");
             $tabungan[$id]->tarikTunai($jumlahTarik);
             break;
     }
-
-} while (true);
-
-// Simpan saldo ke file output_tabungan.txt
-$filename = "output_tabungan.txt";
-$file = fopen($filename, "w");
-if ($file) {
-    fwrite($file, "=== Rekap Saldo Akhir Employee ===\n");
-    foreach ($tabungan as $emp) {
-        fwrite($file, $emp->getNama() . ": Rp" . number_format($emp->getSaldo(), 0, ',', '.') . "\n");
-    }
-    fclose($file);
-    echo ">> Saldo akhir berhasil disimpan di file '$filename'.\n";
-} else {
-    echo ">> Gagal membuka file untuk menulis.\n";
 }
 
-?>
+// Tampilkan rekap saldo akhir di terminal
+echo "\n------------------------------\n";
+echo "=== Rekap Saldo Akhir Siswa ===\n";
+foreach ($tabungan as $emp) {
+    echo $emp->getNama() . ": Rp" . number_format($emp->getSaldo(), 0, ',', '.') . "\n";
+}
+echo "------------------------------\n";
