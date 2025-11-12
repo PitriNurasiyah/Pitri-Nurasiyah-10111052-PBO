@@ -69,4 +69,3 @@ $koneksi = mysqli_connect("localhost", "root", "", "belajar_oop");
 
 </body>
 </html>
-
